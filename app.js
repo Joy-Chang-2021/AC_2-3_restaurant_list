@@ -3,12 +3,20 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+// setting handlebars
+const exphbs = require('express-handlebars')
+app.engine('handlebars', exphbs({ defaultlayout: 'main' }))
+app.set('view engine', 'handlebars')
+
 // index page
 app.get('/', (req, res) => {
-  res.send('index page')
+  res.render('index')
 })
 
 // shop page
+app.get('/:id', (req, res) => {
+  res.render('show')
+})
 
 // listen
 app.listen(port, () => {
