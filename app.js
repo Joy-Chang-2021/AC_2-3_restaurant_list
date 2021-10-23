@@ -10,14 +10,15 @@ app.set('view engine', 'handlebars')
 
 // setting static files
 app.use(express.static('public'))
+const restaurant = require('./restaurant.json').results
 
 // index page
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('index', { restaurant: restaurant })
 })
 
 // shop page
-app.get('/:id', (req, res) => {
+app.get('/restaurants/:id', (req, res) => {
   res.render('show')
 })
 
