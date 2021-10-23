@@ -17,9 +17,10 @@ app.get('/', (req, res) => {
   res.render('index', { restaurant: restaurant })
 })
 
-// shop page
+// shop page ( : params )
 app.get('/restaurants/:id', (req, res) => {
-  res.render('show')
+  const info = restaurant.find(store => store.id.toString() === req.params.id)
+  res.render('show', { restaurant: info })
 })
 
 // listen
