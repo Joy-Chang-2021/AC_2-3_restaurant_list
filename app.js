@@ -23,6 +23,16 @@ app.get('/restaurants/:id', (req, res) => {
   res.render('show', { restaurant: info })
 })
 
+// search ( ? query )
+app.get('/search', (req, res) => {
+  const filtered_list = restaurant.filter(store => {
+    const string = store.name + store.category
+    return string.toLowerCase().includes(req.query.keyword.toLowerCase())
+  })
+  if (filtered_list.length === 0) res.render('error', { keyword: req.query.keyword })
+  else (res.render('index', { restaurant: filtered_list, keyword: req.query.keyword }))
+})
+
 // listen
 app.listen(port, () => {
   console.log(`http://localhost:${port}`)
